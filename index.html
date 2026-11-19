@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-бібліотека «Книжковий Рай»</title>
+    <style>
+        /* 1. Обнулення відступів та встановлення затишного книжкового фону для сторінки */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0e6d2; /* Теплий паперовий фон */
+            background-image: radial-gradient(rgba(139, 69, 19, 0.05) 1px, transparent 0),
+                              radial-gradient(rgba(139, 69, 19, 0.05) 1px, #f0e6d2 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: #222222;
+            line-height: 1.6;
+        }
+
+        /* 🖼️ Шапка сайту з красивим РЕАЛЬНИМ фоном книжкових полиць */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://unsplash.com');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px; /* збільшені відступи для красивого вигляду */
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Стиль для головних слів, щоб вони чітко виділялися на тлі книг */
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 1px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 2. Контейнер навігації .nav з властивостями Flexbox за підручником Тріщук */
+        .nav {
+            display: flex;
+            justify-content: space-around; /* однаковий розподіл вільного простору */
+            align-items: center; /* вирівнювання по центру */
+            background-color: #2b2b2b; /* колір фону за книжкою */
+            color: white;
+            padding: 20px; /* внутрішні відступи 20px */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: #a3e2a6;
+        }
+
+        /* Головний контейнер сторінки */
+        .main-container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Секції сайту */
+        section {
+            background-color: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #1e4620; /* Гарна зелена лінія зліва */
+        }
+        section h2 {
+            color: #1e4620;
+            border-bottom: 2px solid #81c784;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* 3. Модуль гнучких блоків (Flexbox) для карток книг */
+        .book-flex-container {
+            display: flex;
+            flex-wrap: wrap; /* перенос блоків при звуженні вікна */
+            gap: 20px; /* проміжки між картками */
+            margin-top: 25px;
+        }
+        .book-flex-item {
+            flex: 1 1 calc(33.333% - 20px); /* розподіл на 3 колонки */
+            min-width: 280px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .book-flex-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Стиль для обкладинки-полотна */
+        .book-cover-canvas {
+            width: 100%;
+            height: 240px;
+        }
+        
+        .book-description-block {
+            padding: 15px;
+            text-align: center;
+        }
+        .book-description-block h3 {
+            margin: 0 0 10px 0;
+            color: #1e4620;
+        }
+        .book-description-block p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #555555;
+        }
+
+        /* Підвал сторінки */
+        footer {
+            background-color: #2b2b2b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка проєкту з книжковим фоном -->
+    <header>
+        <h1>Онлайн-бібліотека «Книжковий Рай»</h1>
+    </header>
+
+    <!-- Навігаційна панель -->
+    <div class="nav">
+        <a href="#welcome-section">Головна</a>
+        <a href="#library-catalog">Каталог книг</a>
+        <a href="#feedback-section">Контакти</a>
+    </div>
+
+    <!-- Основний контент сайту -->
+    <div class="main-container">
+        
+        <!-- Розділ 1: Привітання та інформація про автора-засновника -->
+        <section id="welcome-section">
+            <h2>Про нас</h2>
+            <p><strong>Ласкаво просимо до онлайн-бібліотеки «Книжковий Рай»!</strong></p>
+
+        <!-- Розділ 2: Каталог книг з макетом Flexbox та автоматичним малюванням -->
+        <section id="library-catalog">
+            <h2>Популярні книги місяця</h2>
+            <div class="book-flex-container">
+                
+                <!-- Картка 1: Острів Скарбів -->
+                <div class="book-flex-item">
+                   
+                    <img src="book1.jpg"  width="240" height="300"  alt="книга 1" class="book-img">
+                    <div class="book-description-block">
+                        <h3>«Острів Скарбів»</h3>
+                        <p>Пригодницька історія про пошуки піратського золота, небезпечні морські мандрівки та справжню сміливість.</p>
+                    </div>
+                </div>
+
+                <!-- Картка 2: Гаррі Поттер -->
+                <div class="book-flex-item">
+                    <img src="book2.jpg"  width="240" height="300"  alt="книга 1" class="book-img">
+                    <div class="book-description-block">
+                        <h3>«Гаррі Поттер»</h3>
+                        <p>Дивовижна та магічна історія про школу чарівництва, справжніх вірних друзів та боротьбу добра зі злом.</p>
+                    </div>
+                </div>
+
+                <!-- Картка 3: Аліса в Країні Див -->
+                <div class="book-flex-item">
+                    <img src="book3.jpg"  width="240" height="300"  alt="книга 1" class="book-img">
+                    <div class="book-description-block">
+                        <h3>«Аліса в Країні Див»</h3>
+                        <p>Неймовірна фантастична подорож крізь кролячу нору у світ, де повністю відсутні звичні закони логіки.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Розділ 3: Контакти -->
+        <section id="feedback-section">
+            <h2>Зворотний зв'язок</h2>
+            <p>Якщо у вас є пропозиції щодо додавання нових цікавих творів у наш «Рай», пишіть на адресу засновника:</p>
+            <p>📧 <strong>Електронна скринька:</strong> info@bookparadise.ua</p>
+        </section>
+
+    </div>
+
+    <!-- Підвал сайту -->
+    <footer>
+        <p>&copy; 2026 Лендинг «Книжковий Рай». Виконано відповідно до матеріалів тем макетування сайту.</p>
+    </footer>
+
+    <!-- Скрипт для малювання обкладинки -->
+    <script>
+        function drawCover(id, bg, text, icon) {
+            const canvas = document.getElementById(id);
+            const ctx = canvas.getContext('2d');
+            
+            // Фон книги
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, 300, 240);
+            
+            // Назва книги
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(text, 150, 150);
+            
+            // Емодзі-іконка замість фотографії
+            ctx.font = '65px Arial';
+            ctx.fillText(icon, 150, 90);
+        }
+
+        window.onload = function() {
+            drawCover('cover1', '#2c3e50', 'ОСТРІВ СКАРБІВ', '🏴‍☠️');
+            drawCover('cover2', '#740001', 'ГАРРІ ПОТТЕР', '⚡');
+            drawCover('cover3', '#8e44ad', 'АЛІСА В КРАЇНІ ДИВ', '🐇');
+        };
+    </script>
+
+</body>
+</html>
